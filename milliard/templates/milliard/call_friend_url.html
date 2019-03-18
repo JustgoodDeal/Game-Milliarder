@@ -1,0 +1,46 @@
+{{question.question_text }}
+
+<style>
+	input[type="submit"]  {
+		pointer-events: none;
+	}
+
+</style>
+
+<form action="{% url 'answer' player.id question.id question.question_text%}" >
+{% csrf_token %}
+   {% for variant in question.variants.all %}
+   </br><input type="radio" name="variant" value="{{ variant.id }}" disabled>{{variant.choice_text}} </br>
+{% endfor %} 
+    </br><input type="submit" value="Ответить" disabled>
+</form>
+
+
+<form action="{% url 'call_friend_url' player.id question.id question.question_text %}" method="post">
+         {% csrf_token %}                   
+              
+            {% if form.name.errors %} 
+
+                {{form.name.errors}}
+               
+            {% endif %}
+
+           {{form.name}}                     
+
+        
+         <button type="submit"> Сохранить  </button>
+    </form>
+
+{% if player.fifty_fifty %}
+<h1> 50/50 </h1>
+{% else %}
+</br><del> 50/50 </del>
+{% endif %}
+
+{% if player.help_people %}
+<h1> Помощь зала </h1>
+{% else %}
+</br><del> Помощь зала </del>
+{% endif %}
+
+</br><del> Звонок другу </del>

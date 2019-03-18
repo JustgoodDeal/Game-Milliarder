@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title>О, миллиардер! - Конец игры</title>
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'milliard/css/game_over_styles.css' %}" type="text/css">
+</head>
+<body>
+<h1 style="color: red; font-size: 80px; margin-left:14%; margin-top:2%">GAME OVER</h1></br>
+</br><strong style="font-size: 20px;  margin-left:9%"> {{player.name}}, к Вашему сожалению, Вы дали неправильный ответ!</strong>
+<p style="font-size: 20px; margin-left:9%; margin-top:10px"> Вот верный ответ: {{question.correct_answer.correct_answer_text}}</p>
+</br><strong style="color: green; font-size: 30px; margin-left:9%; margin-top:10px">Ваш итоговый выигрыш составил:
+<span style="color: red"> {{player.money_won}} млн. долларов</span></strong>
+
+<div class = "container offset-md-1 mt-4" >
+    <div class = "row">
+        <div class = "col-sm-6 mt-3">  
+<p align="center"><b><span style="font-size: 20px"> ЛУЧШИЕ ИЗ ЛУЧШИХ </span></b></p>
+<table class="table table-bordered table-striped">
+  <thead class="thead-dark">
+    <tr align="center">
+      <th scope="col">Имя</th>
+      <th scope="col">Выигрыш</th>
+    </tr>
+  </thead>  
+  <tbody>
+  {% for gamer in gamers  %}
+    <tr align="center">
+      <td >{{gamer.name }}</td>
+    {% if gamer.money_won != 1000 %}
+      <td >{{gamer.money_won}} млн. долларов</td>
+      {% else %}
+      <td >1 миллиард долларов</td>
+    {% endif %}
+    </tr>
+  {% endfor %}
+  </tbody>  
+</table>
+        </div>
+    </div>
+</div>
+
+</br><a style="margin-left:9%" href="{% url 'start_page_url' %}" class="btn btn-primary btn-lg  active" 
+role="button" aria-pressed="true"> Главная страница </a> &emsp;
+<a href="{% url 'create_player_url' %}" class="btn btn-success btn-lg  active" role="button" aria-pressed="true"> Сыграть еще раз </a>
+
+</body>
+</html>

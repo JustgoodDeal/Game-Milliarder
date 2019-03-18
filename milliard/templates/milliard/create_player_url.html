@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title>О, миллиардер! - Создание игрока</title>
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'milliard/css/create_player_styles.css' %}" type="text/css">
+</head>
+<body>
+
+<div class = "container offset-md-1 mt-5" >
+    <div class = "row">
+        <div class = "col-sm-6 mt-5">            
+            
+                <p>Введите имя миллиардера</p>
+        <form action="{% url 'create_player_url' %}" method="post">
+            <div class="form-group">
+            {% csrf_token %}               
+            {% if form.name.errors %}
+                <div class="alert alert-danger"> 
+                {{form.name.errors}}  
+                </div>             
+            {% endif %}
+            {{form.name}}
+            </div>
+            <button type="submit" class="btn btn-success"> Сохранить  </button>
+        </form>             
+
+        </div>
+    </div>
+</div>
+        
+</body>
+</html>
+
+
+
+
+
+
+
+  
