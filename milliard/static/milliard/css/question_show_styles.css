@@ -1,0 +1,148 @@
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+
+.header {
+	background: url("images/Question_show_img.jpg") no-repeat;
+	-webkit-background-size: 100% 300px;
+	background-size: 100% 300px;
+	width: 100%;
+	height: 303px;
+}
+.title {
+	text-align: center;
+	font-size: 27px;
+	border-radius: 20px;
+	padding: 20px;
+	color: #fff;
+	background-color: rgb(29, 29, 170);
+	font-weight: bold;
+}
+.gameContent {
+	display: grid;
+	grid-template-columns: 3fr 6fr 4fr;
+	grid-column-gap: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.block {
+	background-color: rgb(29, 29, 170);
+	height: auto;
+	margin-bottom: 20px;
+}
+.nowInGame {
+	background-color: yellow;
+	color: black;
+}
+.answerVariant {
+	margin-top: 10px;
+	border: 2px solid #fff;
+	border-radius: 20px;
+	width: calc(100% -40px);
+	position: relative;
+	height: 80px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.radioAnswer {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 50%;
+	left: 30px;
+	margin-top: -10px;
+
+}
+.variantText {
+	color: #fff;
+	text-align: center;
+	font-size: 22px;
+	padding-top: 21px;
+	padding-left: 75px;
+}
+.g-rigth {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: space-around;
+    position: relative;
+    height: 455px;
+}
+.g-rigth a {
+	margin-top: 20px;
+	align-items:   center;
+}
+.remark {
+	width: 150px;
+	height: 70px;
+}
+.takeMoney {
+	position: absolute;
+	top: 140px;
+	background-color: green;
+	width: 250px;
+	height: 50px;
+	text-decoration: none;
+	color: #fff;
+	text-align: center;
+	padding-top: 8px;
+	font-size: 24px;
+}
+.takeMoney:hover {
+	background-color: orange;
+	color: #fff;
+}
+.friendText {
+	position: absolute;
+	top: 320px;
+	font-size: 20px;
+}
+.friendText p {
+	color: #fff;
+}
+.otvet {
+	width: 200px;
+	margin-left: calc(50% - 100px);
+	border: none;
+	cursor: pointer;
+	background-color: green;
+	color: #fff;
+	margin-top: 30px;
+	font-size: 24px;
+	border-radius: 20px;
+}
+.otvet:hover {
+	background-color: orange;
+	color: #fff;
+}
+.contain {
+    padding-top: 1px;
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
+	list-style: none;
+    color: rgb(255, 208, 0);
+    height: 455px;
+    background-color: rgb(29, 29, 170);
+}
+.level {
+	width:50%; 
+	float:left;
+}
+.sum {
+	float:right;
+}
+.Vopros {
+	margin-left: 34px;
+	margin-right: 30px;
+}
+.currentVopros {
+	color: yellow;	
+	background-color: rgb(255, 166, 0);
+	margin-left: 34px;
+	margin-right: 5px;
+}

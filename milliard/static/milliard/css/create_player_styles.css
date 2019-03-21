@@ -1,9 +1,10 @@
 body {
-    background-image: url("Create_player_img.jpg");
+    background-image: url("images/Create_player_img.jpg");
     background-size: 100%;
 }
-p {
-    font-size: 26px;
+.enter {
+    font-size: 30px;
     font-weight: 600;
     color: yellow
 }
+

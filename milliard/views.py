@@ -24,8 +24,16 @@ class QuestionShow(View):
     def get(self, request, player_id, question_id, question_text):
         question = get_object_or_404 (Question, id=question_id)
         player = get_object_or_404 (Player, id=player_id)
-        template = 'milliard/questionshows/question_showMy.html'.replace ('My', str(player.count_correct_answers))
-        return render(request, template, context={'question':question, 'player':player})
+        money = {1:1, 2:2, 3:3, 4:5, 5:10, 6:20, 7:40, 8:80, 9:160, 10:32, 11:64, 12:125, 13:250, 14:500, 15:1000}
+        levels = dict()
+        numbers = [i for i in range (15,0,-1)]
+        print(numbers)
+        for i in range (1,16):
+            if i!=15:
+                levels[i] = str (money[i]) + ' млн. долларов'
+            else:
+                levels[i] = '1 миллиард долларов'
+        return render(request, 'milliard/question_show.html', context={'question':question, 'player':player, 'levels':levels, 'numbers':numbers})
 
 class AnswerResponder(View):
     def post(self, request, player_id, question_id, question_text):

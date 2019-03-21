@@ -2,13 +2,13 @@ from django.db import models
 
 class Question(models.Model):
     level = models.IntegerField(default=1)
-    question_text = models.TextField(max_length=200, unique=True)
+    question_text = models.TextField(max_length=130, unique=True)
     def __str__(self):
         return self.question_text
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, related_name = 'variants', on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=100)
+    choice_text = models.CharField(max_length=60)
     def __str__(self):
         return self.choice_text
     
