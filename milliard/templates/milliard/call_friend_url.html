@@ -1,46 +1,101 @@
-{{question.question_text }}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title>О, миллиардер! - Выберите друга</title>
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'milliard/css/call_friend_styles.css' %}" type="text/css">
+</head>
+<body>
+	<header class="header">
+		
+	</header>
 
-<style>
-	input[type="submit"]  {
-		pointer-events: none;
-	}
+	<section class="content">
+		<h1 class="title">{{ question.question_text }}</h1>
 
-</style>
+		<div class="gameContent">
 
-<form action="{% url 'answer' player.id question.id question.question_text%}" >
-{% csrf_token %}
-   {% for variant in question.variants.all %}
-   </br><input type="radio" name="variant" value="{{ variant.id }}" disabled>{{variant.choice_text}} </br>
-{% endfor %} 
-    </br><input type="submit" value="Ответить" disabled>
-</form>
+       <div class = "contain">
+        <ul>
+        {% for i in numbers %}
+          {% if i == question.level %}
+            <li class="currentVopros">
+              <div class = "level" > {{i}} </div>
+              <div class = "sum" > <span class="badge badge-pill badge-warning ">{{ levels|get_item:i }}</span> </div>
+            </li>
+          {% elif i == 10 and question.level > i %}
+              <li class="fixsum">
+                <div class = "level" > {{i}} </div>
+                <div class = "sum" > <span class="badge badge-pill badge-warning">{{ levels|get_item:i }}</span> </div>
+              </li>
+          {% elif i == 5 and question.level > i %}
+            <li class="fixsum">
+              <div class = "level" > {{i}} </div>
+              <div class = "sum" > <span class="badge badge-pill badge-warning">{{ levels|get_item:i }}</span> </div>
+            </li>
+          {% elif i == 10 or i == 5 %}
+              <li class="answeredVopros">
+                <div class = "level" > {{i}} </div>
+                <div class = "sum" > <span class="badge badge-pill badge-warning">{{ levels|get_item:i }}</span> </div>
+              </li>
+          {% elif i > question.level %}
+            <li class="Vopros">
+              <div class = "level" > {{i}} </div>
+              <div class = "sum" > <span class="badge badge-pill badge-warning">{{ levels|get_item:i }}</span> </div>
+            </li>
+          {% elif i < question.level %}
+          <li class="answeredVopros">
+            <div class = "level" > {{i}} </div>
+            <div class = "sum" > <span class="badge badge-pill badge-warning">{{ levels|get_item:i }}</span> </div>
+          </li>
+          {% endif %}
+        {% endfor %}
+        <ul>
+        </div>
 
+			<div class="g-center block">
 
-<form action="{% url 'call_friend_url' player.id question.id question.question_text %}" method="post">
-         {% csrf_token %}                   
-              
-            {% if form.name.errors %} 
-
-                {{form.name.errors}}
-               
+        <div class="callFriend">
+          <p>Введите имя друга</p>
+          <form action="{% url 'call_friend_url' player.id question.id question.question_text %}" method="post">
+          <div class="form-group">
+            {% csrf_token %}               
+            {% if form.name.errors %}
+                <div class="alert alert-danger"> 
+                {{form.name.errors}}  
+                </div>             
             {% endif %}
+            {{form.name}}
+          </div>
+            <p class="enterme"><button type="submit" class="enterName"> Сохранить  </button></p>
+            </form> 
+      </div>
 
-           {{form.name}}                     
+				</div>
+				<div class="g-rigth block">
 
-        
-         <button type="submit"> Сохранить  </button>
-    </form>
+          {% if player.fifty_fifty %}
+					<a href="#">
+						<img src="{% static 'milliard/css/images/help50.jpg' %}" alt="" class="remark">
+					</a>
+          {% endif %}
+          {% if player.help_people %}
+					<a href="#">
+						<img src="{% static 'milliard/css/images/helpZal.png' %}" alt="" class="remark">
+					</a>
+          {% endif %}
 
-{% if player.fifty_fifty %}
-<h1> 50/50 </h1>
-{% else %}
-</br><del> 50/50 </del>
-{% endif %}
+          {% if player.money_won %}
+					  <a href="{% url 'take_money_url' player.id %}" class="takeMoney" 
+            onclick="return confirm('Миллиард раз подумайте, прежде чем нажать OK')">ЗАБРАТЬ ДЕНЬГИ</a>
+          {% endif %}       
 
-{% if player.help_people %}
-<h1> Помощь зала </h1>
-{% else %}
-</br><del> Помощь зала </del>
-{% endif %}
-
-</br><del> Звонок другу </del>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

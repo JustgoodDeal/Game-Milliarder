@@ -109,15 +109,11 @@
 	margin-left: calc(50% - 100px);
 	border: none;
 	cursor: pointer;
-	background-color: green;
+	background-color: red;
 	color: #fff;
 	margin-top: 30px;
 	font-size: 24px;
 	border-radius: 20px;
-}
-.otvet:hover {
-	background-color: orange;
-	color: #fff;
 }
 .contain {
     padding-top: 1px;
@@ -155,4 +151,35 @@
 	color: red;	
 	margin-left: 35px;
 	margin-right: 20px;
+}
+.callFriend {
+	position: absolute;
+	width: 600px;
+	height: 100px;
+	color: white;
+	text-align: center;
+	padding-top: 100px;
+	padding-left: 200px;
+	font-size: 28px;
+	font-weight: bold;
+	font-family: 'Courier New', Courier, monospace;
+}
+.enterName {
+	top: 150px;
+	background-color: green;
+	width: 250px;
+	height: 50px;
+	text-decoration: none;
+	color: #fff;
+	text-align: center;
+	padding-top: 3px;
+	font-size: 24px;
+	border: none;
+	border-radius: 40px; 
+}
+.enterme {
+	padding-top: 5px;
+}
+.allert {
+	font-size: 14px;
 }

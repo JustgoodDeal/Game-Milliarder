@@ -11,6 +11,12 @@ path('<int:player_id>/win/', views.winner, name = 'winner_url'),
 path('<int:player_id>/take_money/', views.takemoney, name = 'take_money_url'),
 path('fifty/<int:player_id>/<int:question_id>/<str:question_text>/', views.fifty_fifty, name = 'fifty_fifty_url'),
 path('peoplehelp/<int:player_id>/<int:question_id>/<str:question_text>/', views.help_people, name = 'help_people_url'),
-path('callfriend/<int:player_id>/<int:question_id>/<str:question_text>/', views.CallFriend.as_view(), name = 'call_friend_url'),
+path('callfriend/<int:player_id>/<int:question_id>/<str:question_text>/', views.CallFriendCreator.as_view(), name = 'call_friend_url'),
 path('friendhelp/<str:friendname>/<int:player_id>/<int:question_id>/<str:question_text>/', views.call_friend_after, name = 'call_friend_after_url'),
+path('fifty/peoplehelp/<int:player_id>/<int:question_id>/<str:question_text>/<int:true_answer_id>/<int:false_answer_id>/', 
+    views.fifty_help_people, name = 'fifty_help_people_url'),
+path('fifty/callfriend/<int:player_id>/<int:question_id>/<str:question_text>/<int:true_answer_id>/<int:false_answer_id>/', 
+    views.fifty_CallFriendCreator.as_view(), name = 'fifty_call_friend_url'),
+path('fifty/friendhelp/<str:friendname>/<int:player_id>/<int:question_id>/<str:question_text>/<int:true_answer_id>/<int:false_answer_id>/',
+    views.fifty_call_friend_after, name = 'fifty_call_friend_after_url')
 ]

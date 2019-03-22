@@ -53,11 +53,9 @@
 	top: 50%;
 	left: 30px;
 	margin-top: -10px;
-
 }
 .variantText {
 	color: #fff;
-	text-align: center;
 	font-size: 22px;
 	padding-top: 21px;
 	padding-left: 75px;
@@ -155,4 +153,9 @@
 	color: red;	
 	margin-left: 35px;
 	margin-right: 20px;
+}
+.percent {
+	color: yellow; 
+	
+	padding-left: 20px
 }

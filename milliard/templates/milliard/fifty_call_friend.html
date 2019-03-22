@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>О, миллиардер! - {{question.level}} вопрос</title>
+	<title>О, миллиардер! - Выберите</title>
   {% load staticfiles %}
-  <link rel="stylesheet" href="{% static 'milliard/css/question_show_styles.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'milliard/css/fifty_call_friend_styles.css' %}" type="text/css">
 </head>
 <body>
 	<header class="header">
@@ -59,52 +59,38 @@
 
 			<div class="g-center block">
 
-          <form action="{% url 'answer' player.id question.id question.question_text%}" method="post">
-          {% csrf_token %}
-          {% for variant in question.variants.all %}
-					<div class="answerVariant">
-            <input type="radio" class="radioAnswer" name="variant" id="{{ variant.id }}" onclick="answer()" value="{{ variant.id }}">
-            <label for="{{ variant.id }}"> <p class="variantText">{{variant.choice_text}}</p></label>
-					</div>
-					{% endfor %} 
-          <p><input type="submit" value="ОТВЕТИТЬ" class="otvet" id="btn" disabled></p>
-          </form>
+        <div class="callFriend">
+          <p>Введите имя друга</p>
+          <form action="{% url 'fifty_call_friend_url' player.id question.id question.question_text true_answer.id false_answer.id %}" method="post">
+          <div class="form-group">
+            {% csrf_token %}               
+            {% if form.name.errors %}
+                <div class="alert alert-danger"> 
+                {{form.name.errors}}  
+                </div>             
+            {% endif %}
+            {{form.name}}
+          </div>
+            <p class="enterme"><button type="submit" class="enterName"> Сохранить  </button></p>
+            </form> 
+      </div>
 
 				</div>
 				<div class="g-rigth block">
 
-          {% if player.fifty_fifty %}
-					<a href="{% url 'fifty_fifty_url' player.id question.id question.question_text %}">
-						<img src="{% static 'milliard/css/images/help50.jpg' %}" alt="" class="remark">
-					</a>
-          {% endif %}
           {% if player.help_people %}
-					<a href="{% url 'help_people_url' player.id question.id question.question_text %}">
+					  <a href="#">
 						<img src="{% static 'milliard/css/images/helpZal.png' %}" alt="" class="remark">
-					</a>
-          {% endif %}
-          {% if player.call_friend %}
-					<a href="{% url 'call_friend_url' player.id question.id question.question_text %}">
-						<img src="{% static 'milliard/css/images/helpFriend.jpg' %}" alt="" class="remark">
-					</a>
+					  </a>
           {% endif %}
 
           {% if player.money_won %}
 					  <a href="{% url 'take_money_url' player.id %}" class="takeMoney" 
             onclick="return confirm('Миллиард раз подумайте, прежде чем нажать OK')">ЗАБРАТЬ ДЕНЬГИ</a>
-          {% endif %}
+          {% endif %}       
 
-					<div class="friendText">
-						<p></p>
-					</div>
 			</div>
 		</div>
 	</section>
-<script>
-  var button = document.getElementById('btn')
-  function answer () {
-    button.removeAttribute('disabled')
-  }
-</script>
 </body>
 </html>

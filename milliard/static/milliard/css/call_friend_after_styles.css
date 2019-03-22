@@ -98,11 +98,21 @@
 }
 .friendText {
 	position: absolute;
-	top: 320px;
-	font-size: 20px;
+	top: 280px;
+    font-size: 20px;
+    width: 500px;    
+    margin-right: 20px;
 }
-.friendText p {
-	color: #fff;
+.shure {
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+.friendAnswer {
+    text-align: center;
+    background-color: orange;
+    font-weight: bold;
+    color: #000;
 }
 .otvet {
 	width: 200px;

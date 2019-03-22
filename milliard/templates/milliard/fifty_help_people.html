@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>О, миллиардер! - {{question.level}} вопрос</title>
+	<title>О, миллиардер! - Помощь зала</title>
   {% load staticfiles %}
-  <link rel="stylesheet" href="{% static 'milliard/css/question_show_styles.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'milliard/css/fifty_help_people_styles.css' %}" type="text/css">
 </head>
 <body>
 	<header class="header">
@@ -62,29 +62,26 @@
           <form action="{% url 'answer' player.id question.id question.question_text%}" method="post">
           {% csrf_token %}
           {% for variant in question.variants.all %}
-					<div class="answerVariant">
-            <input type="radio" class="radioAnswer" name="variant" id="{{ variant.id }}" onclick="answer()" value="{{ variant.id }}">
-            <label for="{{ variant.id }}"> <p class="variantText">{{variant.choice_text}}</p></label>
-					</div>
-					{% endfor %} 
+            {% if votes|get_item:variant is not None %}
+				<div class="answerVariant">
+                    <input type="radio" class="radioAnswer" name="variant" id="{{ variant.id }}" onclick="answer()" value="{{ variant.id }}">
+                    <label for="{{ variant.id }}"> <p class="variantText">{{variant.choice_text}} <span class="percent">
+                    {{ votes|get_item:variant }} % </span></p></label>
+				</div>
+            {% else %}
+                <div class="answerVariant">
+                    <input type="hidden">  
+                </div>
+            {% endif %}
+		{% endfor %} 
           <p><input type="submit" value="ОТВЕТИТЬ" class="otvet" id="btn" disabled></p>
           </form>
 
 				</div>
 				<div class="g-rigth block">
 
-          {% if player.fifty_fifty %}
-					<a href="{% url 'fifty_fifty_url' player.id question.id question.question_text %}">
-						<img src="{% static 'milliard/css/images/help50.jpg' %}" alt="" class="remark">
-					</a>
-          {% endif %}
-          {% if player.help_people %}
-					<a href="{% url 'help_people_url' player.id question.id question.question_text %}">
-						<img src="{% static 'milliard/css/images/helpZal.png' %}" alt="" class="remark">
-					</a>
-          {% endif %}
           {% if player.call_friend %}
-					<a href="{% url 'call_friend_url' player.id question.id question.question_text %}">
+					<a href="{% url 'fifty_call_friend_url' player.id question.id question.question_text true_answer.id false_answer.id %}">
 						<img src="{% static 'milliard/css/images/helpFriend.jpg' %}" alt="" class="remark">
 					</a>
           {% endif %}
@@ -94,9 +91,6 @@
             onclick="return confirm('Миллиард раз подумайте, прежде чем нажать OK')">ЗАБРАТЬ ДЕНЬГИ</a>
           {% endif %}
 
-					<div class="friendText">
-						<p></p>
-					</div>
 			</div>
 		</div>
 	</section>
