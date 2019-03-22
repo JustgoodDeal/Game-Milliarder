@@ -5,7 +5,7 @@
 }
 
 .header {
-	background: url("images/Question_show_img.jpg") no-repeat;
+	background: url("images/Create_friend_img.png") no-repeat;
 	-webkit-background-size: 100% 300px;
 	background-size: 100% 300px;
 	width: 100%;
@@ -141,6 +141,12 @@
 	background-color: rgb(255, 166, 0);
 	margin-left: 35px;
 	margin-right: 20px;
+}
+.currentVoprosRed {
+	color: red;	
+	background-color: rgb(255, 166, 0);
+	margin-left: 35px;
+	margin-right: 20px;	
 }
 .answeredVopros {
 	color: white;	

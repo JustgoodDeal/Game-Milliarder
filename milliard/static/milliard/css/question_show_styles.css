@@ -146,6 +146,12 @@
 	margin-left: 35px;
 	margin-right: 20px;
 }
+.currentVoprosRed {
+	color: red;	
+	background-color: rgb(255, 166, 0);
+	margin-left: 35px;
+	margin-right: 20px;	
+}
 .answeredVopros {
 	color: white;	
 	margin-left: 35px;

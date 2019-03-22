@@ -1,96 +1,81 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-	<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>О, миллиардер! - Выберите</title>
-  {% load staticfiles %}
-  <link rel="stylesheet" href="{% static 'milliard/css/fifty_call_friend_styles.css' %}" type="text/css">
-</head>
-<body>
-	<header class="header">
-		
-	</header>
+{% extends 'milliard/base.html' %}
 
-	<section class="content">
-		<h1 class="title">{{ question.question_text }}</h1>
+{{% block titleStatic %}
+    <title>О, миллиардер! - Выберите друга</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'milliard/css/fifty_call_friend_styles.css' %}" type="text/css">
+{% endblock %}
 
-		<div class="gameContent">
-
-       <div class = "contain">
-        <ul>
-        {% for i in numbers %}
-          {% if i == question.level %}
-            <li class="currentVopros">
-              <div class = "level" > {{i}} </div>
-              <div class = "sum" > <span class="badge badge-pill badge-warning ">{{ levels|get_item:i }}</span> </div>
-            </li>
-          {% elif i == 10 and question.level > i %}
+{% block content %}
+    <header class="header">    
+    </header>
+    <section class="content">
+      <h1 class="title">{{ question.question_text }}</h1>
+      <div class="gameContent">
+        <div class = "contain">
+          <ul>
+           {% for i in numbers %}
+            {% if i == 10 and i == question.level %}
+              <li class="currentVoprosRed">
+                <div class = "level" > {{i}} </div>
+                <div class = "sum" > <span class="badge badge-pill badge-warning ">{{ levels|get_item:i }}</span> </div>
+              </li>
+            {% elif i == 5 and i == question.level %}
+              <li class="currentVoprosRed">
+                <div class = "level" > {{i}} </div>
+                <div class = "sum" > <span class="badge badge-pill badge-warning ">{{ levels|get_item:i }}</span> </div>
+              </li>
+            {% elif i == question.level %}
+              <li class="currentVopros">
+                <div class = "level" > {{i}} </div>
+                <div class = "sum" > <span class="badge badge-pill badge-warning ">{{ levels|get_item:i }}</span> </div>
+              </li>
+            {% elif i == 10 or i == 5 %}
               <li class="fixsum">
                 <div class = "level" > {{i}} </div>
                 <div class = "sum" > <span class="badge badge-pill badge-warning">{{ levels|get_item:i }}</span> </div>
               </li>
-          {% elif i == 5 and question.level > i %}
-            <li class="fixsum">
-              <div class = "level" > {{i}} </div>
-              <div class = "sum" > <span class="badge badge-pill badge-warning">{{ levels|get_item:i }}</span> </div>
-            </li>
-          {% elif i == 10 or i == 5 %}
+            {% elif i > question.level %}
+              <li class="Vopros">
+                <div class = "level" > {{i}} </div>
+                <div class = "sum" > <span class="badge badge-pill badge-warning">{{ levels|get_item:i }}</span> </div>
+              </li>
+            {% elif i < question.level %}
               <li class="answeredVopros">
                 <div class = "level" > {{i}} </div>
                 <div class = "sum" > <span class="badge badge-pill badge-warning">{{ levels|get_item:i }}</span> </div>
               </li>
-          {% elif i > question.level %}
-            <li class="Vopros">
-              <div class = "level" > {{i}} </div>
-              <div class = "sum" > <span class="badge badge-pill badge-warning">{{ levels|get_item:i }}</span> </div>
-            </li>
-          {% elif i < question.level %}
-          <li class="answeredVopros">
-            <div class = "level" > {{i}} </div>
-            <div class = "sum" > <span class="badge badge-pill badge-warning">{{ levels|get_item:i }}</span> </div>
-          </li>
-          {% endif %}
-        {% endfor %}
-        <ul>
-        </div>
-
-			<div class="g-center block">
-
-        <div class="callFriend">
-          <p>Введите имя друга</p>
-          <form action="{% url 'fifty_call_friend_url' player.id question.id question.question_text true_answer.id false_answer.id %}" method="post">
-          <div class="form-group">
-            {% csrf_token %}               
-            {% if form.name.errors %}
-                <div class="alert alert-danger"> 
-                {{form.name.errors}}  
-                </div>             
             {% endif %}
-            {{form.name}}
+          {% endfor %}
+          <ul>
           </div>
-            <p class="enterme"><button type="submit" class="enterName"> Сохранить  </button></p>
-            </form> 
-      </div>
-
-				</div>
-				<div class="g-rigth block">
-
+          <div class="g-center block">
+            <div class="callFriend">
+              <p>Введите имя друга, которому будете звонить</p>
+              <form action="{% url 'fifty_call_friend_url' player.id question.id question.question_text true_answer.id false_answer.id %}" method="post">
+              {% csrf_token %}  
+              <div class="form-group">             
+              {% if form.name.errors %}
+                <div class="alert alert-danger"> 
+                 {{form.name.errors}}  
+                </div>             
+              {% endif %}
+              {{form.name}}
+               </div>
+              <p class="enterme"><button type="submit" class="enterName"> Сохранить  </button></p>
+              </form> 
+            </div>
+          </div>
+          <div class="g-rigth block">
           {% if player.help_people %}
-					  <a href="#">
-						<img src="{% static 'milliard/css/images/helpZal.png' %}" alt="" class="remark">
-					  </a>
+            <a href="#">
+            <img src="{% static 'milliard/css/images/helpZal.png' %}" alt="" class="remark"></a>
           {% endif %}
-
           {% if player.money_won %}
-					  <a href="{% url 'take_money_url' player.id %}" class="takeMoney" 
-            onclick="return confirm('Миллиард раз подумайте, прежде чем нажать OK')">ЗАБРАТЬ ДЕНЬГИ</a>
+          <a href="{% url 'take_money_url' player.id %}" class="takeMoney" 
+          onclick="return confirm('Миллиард раз подумайте, прежде чем нажать OK')">ЗАБРАТЬ ДЕНЬГИ</a>
           {% endif %}       
-
-			</div>
-		</div>
-	</section>
-</body>
-</html>
+        </div>
+      </div>
+    </section>
+{% endblock %}
