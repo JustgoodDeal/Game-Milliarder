@@ -1,4 +1,44 @@
 body {
     background-image: url("images/Take_money_img.jpg");
-    background-size: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 97vh;
+}
+h1 {
+    color: green; 
+    font-size: 50px; 
+    margin-left:40px; 
+    margin-top:1%
+}
+.itog {
+    width: 43%;
+    margin-top: 55px;
+    font-size: 27px; 
+    margin-left: 55px;
+    font-weight: bold; 
+    text-align: center;
+}
+.win {
+    color: red; 
+}
+.winPrice {
+    color: blue;
+    margin-left: 10px;
+    font-size: 35px;
+    margin-top: 20px;
+} 
+.best {
+    width: 35%;
+    margin-left: 113px;
+    margin-top: 55px;
+    text-align: center;
+}
+.money {
+    width: 50%;
+    height: 30px;
+}
+.button {
+    width: 35%;
+    margin-top: 25px;
+    margin-left: 217px;
 }

@@ -1,6 +1,48 @@
 body {
     background-image: url("images/Game_over_img.jpg");
-    background-size: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 98vh;
+}
+h1 {
+    color: red; 
+    font-size: 80px; 
+    margin-left:288px; 
+    margin-top:10px;
+}
+.otvet {
+    margin-left: 153px;
+    margin-top: 40px;
+    font-size: 20px; 
+}
+.true {
+    margin-top:15px;
+}
+.itog {
+    margin-top: 40px;
+}
+.win {
+    color: green; 
+    font-size: 30px; 
+    margin-left: 85px; 
+}
+.winPrice {
+    color: red;
+    margin-left: 10px; 
+}
+.best {
+    width: 35%;
+    margin-left: 153px;
+    margin-top: 40px;
+}
+.money {
+    width: 50%;
+    text-align: center;
+    height: 30px;
+}
+.button {
+    margin-top: 25px;
+    margin-left: 257px;
 }
 
 

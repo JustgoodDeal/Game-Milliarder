@@ -1,10 +1,22 @@
 body {
     background-image: url("images/Create_player_img.jpg");
-    background-size: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 94vh;
 }
 .enter {
     font-size: 30px;
     font-weight: 600;
-    color: yellow
+    color: yellow;
+    padding-top: 100px;
+    padding-right: 1px;
 }
-
+.container {
+    width: 49%;
+    padding-left: 50px;
+}
+.btn {
+    font-size: 20px;
+    font-weight: bold;
+    
+}

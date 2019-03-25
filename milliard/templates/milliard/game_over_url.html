@@ -7,39 +7,41 @@
 {% endblock %}
 
 {% block content %}
-    <h1 style="color: red; font-size: 80px; margin-left:14%; margin-top:2%">GAME OVER</h1></br>
-    </br><strong style="font-size: 20px;  margin-left:9%"> {{player.name}}, к Вашему сожалению, Вы дали неправильный ответ!</strong>
-    <p style="font-size: 20px; margin-left:9%; margin-top:10px"> Вот верный ответ: {{question.correct_answer.correct_answer_text}}</p>
-    </br><strong style="color: green; font-size: 30px; margin-left:9%; margin-top:10px">Ваш итоговый выигрыш составил:
-    <span style="color: red"> {{player.money_won}} млн. долларов</span></strong>
-    <div class = "container offset-md-1 mt-4" >
-        <div class = "row">
-            <div class = "col-sm-6 mt-3">  
-              <p align="center"><b><span style="font-size: 20px"> ЛУЧШИЕ ИЗ ЛУЧШИХ </span></b></p>
-              <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
-                  <tr align="center">
-                    <th scope="col">Имя</th>
-                    <th scope="col">Выигрыш</th>
-                  </tr>
-                </thead>  
-                <tbody>
-                {% for gamer in gamers  %}
-                  <tr align="center">
-                    <td >{{gamer.name }}</td>
-                  {% if gamer.money_won != 1000 %}
-                    <td >{{gamer.money_won}} млн. долларов</td>
-                  {% else %}
-                    <td >1 миллиард долларов</td>
-                  {% endif %}
-                    </tr>
-                {% endfor %}
-                </tbody>  
-              </table>
-            </div>
-        </div>
+    <h1>GAME OVER</h1>
+    <div class="otvet">
+      <strong class="false"> {{player.name}}, Вы дали неправильный ответ!</strong>
+      <p class="true"> Вот верный ответ: {{question.correct_answer.correct_answer_text}}</p>
     </div>
-    </br><a style="margin-left:9%" href="{% url 'start_page_url' %}" class="btn btn-primary btn-lg  active" 
-    role="button" aria-pressed="true"> Главная страница </a> &emsp;
+    <div class="itog">
+    <strong class="win">Ваш итоговый выигрыш составил:
+    <span class="winPrice"> {{player.money_won}} млн. долларов</span></strong>
+    </div>
+    <div class="best"> 
+      <p align="center"><b><span style="font-size: 20px"> ЛУЧШИЕ ИЗ ЛУЧШИХ </span></b></p>
+        <table class="table table-bordered table-striped">
+          <thead class="thead-dark">
+            <tr align="center">
+              <th scope="col">Имя</th>
+              <th class="money" scope="col">Выигрыш</th>
+            </tr>
+          </thead>  
+          <tbody>
+          {% for gamer in gamers  %}
+            <tr align="center">
+              <td >{{gamer.name }}</td>
+            {% if gamer.money_won != 1000 %}
+              <td >{{gamer.money_won}} млн. долларов</td>
+            {% else %}
+              <td >1 миллиард долларов</td>
+            {% endif %}
+            </tr>
+          {% endfor %}
+          </tbody>  
+        </table>
+    </div>
+    <div class="button">       
+    <a href="{% url 'start_page_url' %}" class="btn btn-primary btn-lg  active" 
+    role="button" aria-pressed="true"> Главная страница </a> &emsp;&emsp;
     <a href="{% url 'create_player_url' %}" class="btn btn-success btn-lg  active" role="button" aria-pressed="true"> Сыграть еще раз </a>
+     </div>  
 {% endblock %}
